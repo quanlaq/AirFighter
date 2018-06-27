@@ -3,15 +3,21 @@ var Ship = cc.Sprite.extend({
     //player:null,
     ctor: function(){
         this._super("#player_1/player_b_m.png");
+
         this.init();
     },
 
     init: function(){
         var appearPosition = cc.p(cc.winSize.width/2, -200);
-        this.x = appearPosition.x;
-        this.y = appearPosition.y;
+        this.attr({
+            x : appearPosition.x,
+            y : appearPosition.y
+        });
+
         var MoveToStart = cc.MoveTo(1, cc.p(this.x, 50));
         this.runAction(MoveToStart);
+        //this.addChild(bullet, 30);
+        this.schedule(this.shoot, 1/6);
         this.scheduleUpdate();
 
     },
@@ -43,6 +49,15 @@ var Ship = cc.Sprite.extend({
             case 0:
                 break;
         }
+    },
+
+    shoot: function(){
+
+        var bullet = new Bullet();
+        this.addChild(bullet);
+        bullet.x = this.width/2;
+        bullet.y = 70;
+
     }
 });
 

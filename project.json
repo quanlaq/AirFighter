@@ -18,6 +18,7 @@
         "src/**/*.js"
     ],
     "jsList": [
+        "src/Bullet.js",
         "src/GameConfig.js",
         "src/Resource.js",
         "src/Ship.js",

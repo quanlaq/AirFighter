@@ -5,7 +5,6 @@ var SysMenu = cc.Layer.extend({
     screenRect:null,
     ctor: function(){
         this._super();
-        cc.log("1");
         cc.spriteFrameCache.addSpriteFrames(res.player_plist);
         cc.spriteFrameCache.addSpriteFrames(res.fx_plist);
         this.init();
@@ -20,6 +19,7 @@ var SysMenu = cc.Layer.extend({
         var mid = cc.spriteFrameCache.getSpriteFrame("player_1/player_b_m.png");
         var r1 = cc.spriteFrameCache.getSpriteFrame("player_1/player_b_r1.png");
         var r2 = cc.spriteFrameCache.getSpriteFrame("player_1/player_b_r2.png");
+
 
         MW.move_left = new cc.Animation([mid, l2, l1], 0.1);
         MW.move_right = new cc.Animation([mid, r1, r2], 0.1);
