@@ -11,3 +11,15 @@ MW.idle_left=null;
 MW.idle_mid=null;
 MW.move_mid_from_r=null;
 MW.move_mid_from_l=null;
+
+
+MW.CONTAINER = {
+    ENEMIES:[],
+    ENEMY_BULLETS:[],
+    PLAYER_BULLETS:[],
+    EXPLOSIONS:[],
+    SPARKS:[],
+    HITS:[],
+    BACKSKYS:[],
+    BACKTILEMAPS:[]
+};

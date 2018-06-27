@@ -4,6 +4,7 @@ var Ship = cc.Sprite.extend({
     ctor: function(){
         this._super("#player_1/player_b_m.png");
 
+
         this.init();
     },
 
@@ -53,7 +54,7 @@ var Ship = cc.Sprite.extend({
 
     shoot: function(){
 
-        var bullet = new Bullet();
+        var bullet = new Bullet.getOrCreateBullet();
         this.addChild(bullet);
         bullet.x = this.width/2;
         bullet.y = 70;

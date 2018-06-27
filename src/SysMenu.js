@@ -7,6 +7,9 @@ var SysMenu = cc.Layer.extend({
         this._super();
         cc.spriteFrameCache.addSpriteFrames(res.player_plist);
         cc.spriteFrameCache.addSpriteFrames(res.fx_plist);
+        cc.audioEngine.preloadMusic(res.backgroundmusic_mp3);
+        cc.audioEngine.playMusic(res.backgroundmusic_mp3, true);
+
         this.init();
     },
 
@@ -38,6 +41,7 @@ var SysMenu = cc.Layer.extend({
     initBackground:function(){
         var winSize = cc.director.getWinSize();
         var bg = new cc.Sprite(res.background);
+
         // cc.log(bg.size);
         bg.x = winSize.width/2;
         bg.y = winSize.height/2;
