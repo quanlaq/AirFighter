@@ -2,27 +2,30 @@ var g_sharedGameLayer;
 
 var SysMenu = cc.Layer.extend({
     _ship:null,
-    screenRect:null,
+    _shadow:null,
     ctor: function(){
         this._super();
         cc.spriteFrameCache.addSpriteFrames(res.player_plist);
         cc.spriteFrameCache.addSpriteFrames(res.fx_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.shadows_plist);
         cc.audioEngine.preloadMusic(res.backgroundmusic_mp3);
         cc.audioEngine.playMusic(res.backgroundmusic_mp3, true);
-
+        // cc.audioEngine.preloadEffect(res.bulletsound_mp3);
         this.init();
     },
 
     init:function(){
         this.initBackground();
         this._ship = new Ship();
+        this._shadow = new Shadow();
+
+
         // this.screenRect = cc.rect(0, 0, winSize.width, winSize.height + 10);
         var l1 = cc.spriteFrameCache.getSpriteFrame("player_1/player_b_l1.png");
         var l2 = cc.spriteFrameCache.getSpriteFrame("player_1/player_b_l2.png");
         var mid = cc.spriteFrameCache.getSpriteFrame("player_1/player_b_m.png");
         var r1 = cc.spriteFrameCache.getSpriteFrame("player_1/player_b_r1.png");
         var r2 = cc.spriteFrameCache.getSpriteFrame("player_1/player_b_r2.png");
-
 
         MW.move_left = new cc.Animation([mid, l2, l1], 0.1);
         MW.move_right = new cc.Animation([mid, r1, r2], 0.1);
@@ -33,8 +36,25 @@ var SysMenu = cc.Layer.extend({
         MW.move_mid_from_l.retain();
         MW.move_mid_from_r.retain();
 
+        l1 = cc.spriteFrameCache.getSpriteFrame("player_shadow/player_shadow_l1.png");
+        l2 = cc.spriteFrameCache.getSpriteFrame("player_shadow/player_shadow_l2.png");
+        mid = cc.spriteFrameCache.getSpriteFrame("player_shadow/player_shadow_m.png");
+        r1 = cc.spriteFrameCache.getSpriteFrame("player_shadow/player_shadow_r1.png");
+        r2 = cc.spriteFrameCache.getSpriteFrame("player_shadow/player_shadow_r2.png");
+
+
+        MW.smove_left = new cc.Animation([mid, l2, l1], 0.1);
+        MW.smove_right = new cc.Animation([mid, r1, r2], 0.1);
+        MW.smove_mid_from_r = new cc.Animation([l1, l2, mid], 0.1);
+        MW.smove_mid_from_l = new cc.Animation([r2, r1, mid], 0.1);
+        MW.smove_left.retain();
+        MW.smove_right.retain();
+        MW.smove_mid_from_l.retain();
+        MW.smove_mid_from_r.retain();
+
         g_sharedGameLayer = this;
         this.addChild(this._ship);
+        this.addChild(this._shadow, 20);
         this.addKeyboardListener();
 
     },
@@ -47,6 +67,7 @@ var SysMenu = cc.Layer.extend({
         bg.y = winSize.height/2;
         // var scale = new cc.ScaleTo(0, winSize.width/bg.width, winSize.height/bg.height);
         // bg.action(scale);
+
         bg.setScale(winSize.width/bg.width, winSize.height/bg.height);
         this.addChild(bg, 0, 0);
     },
@@ -74,6 +95,7 @@ var SysMenu = cc.Layer.extend({
                         MW.KEYS[cc.KEY.right]= false;
                         MW.DIRECTION.x = -1;
                         self._ship.runAction(cc.animate(MW.move_left));
+                        self._shadow.runAction(cc.animate(MW.smove_left));
                     }
                     if(key === cc.KEY.d || key === cc.KEY.right) {
                         MW.KEYS[key] = true;
@@ -81,6 +103,7 @@ var SysMenu = cc.Layer.extend({
                         MW.KEYS[cc.KEY.a]= false;
                         MW.DIRECTION.x = +1;
                         self._ship.runAction(cc.animate(MW.move_right));
+                        self._shadow.runAction(cc.animate(MW.smove_right));
                     }
 
                 },
@@ -97,11 +120,13 @@ var SysMenu = cc.Layer.extend({
                         MW.KEYS[key] = false;
                         MW.DIRECTION.x = 0;
                         self._ship.runAction(cc.animate(MW.move_mid_from_l));
+                        self._shadow.runAction(cc.animate(MW.smove_mid_from_l));
                     }
                     if((key === cc.KEY.d || key === cc.KEY.right) && MW.KEYS[key])  {
                         MW.KEYS[key] = false;
                         MW.DIRECTION.x = 0;
                         self._ship.runAction(cc.animate(MW.move_mid_from_r));
+                        self._shadow.runAction(cc.animate(MW.smove_mid_from_r));
                     }
                 }
             }, this);

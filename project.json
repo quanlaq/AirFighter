@@ -21,6 +21,7 @@
         "src/Bullet.js",
         "src/GameConfig.js",
         "src/Resource.js",
+        "src/Shadow.js",
         "src/Ship.js",
         "src/SysMenu.js"
     ]

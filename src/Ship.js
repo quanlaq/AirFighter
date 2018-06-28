@@ -3,8 +3,6 @@ var Ship = cc.Sprite.extend({
     //player:null,
     ctor: function(){
         this._super("#player_1/player_b_m.png");
-
-
         this.init();
     },
 
@@ -24,6 +22,9 @@ var Ship = cc.Sprite.extend({
     },
     update: function(dt){
         // this._runAnimation();
+        MW.SHIP_POS.x = this.x;
+        MW.SHIP_POS.y = this.y;
+
         this.updateMove(dt);
     },
     updateMove:function(dt) {
