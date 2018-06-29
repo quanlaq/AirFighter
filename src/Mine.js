@@ -1,5 +1,6 @@
 var Mine = cc.Sprite.extend({
-    speed: 100,
+    speed: 150,
+    active: true,
     ctor: function(){
         this._super("#mine_1/mine_1_02.png");
         this.init();
@@ -15,9 +16,9 @@ var Mine = cc.Sprite.extend({
             aniFrames.push(x);
         }
 
-        cc.log(aniFrames);
+        // cc.log(aniFrames);
 
-        var animation = new cc.Animation(aniFrames, 0.1);
+        var animation = new cc.Animation(aniFrames, 0.05);
         this.runAction(cc.animate(animation).repeatForever());
 
         this.scheduleUpdate();
@@ -28,8 +29,32 @@ var Mine = cc.Sprite.extend({
 
         this.y = this.y - this.speed*dt;
 
-        if(this.y < 0) this.y = cc.winSize.height;
+        if(this.y < 0) this.active = false;
+
+
 
     }
 
 });
+
+Mine.getOrCreateMine= function(){
+    var selChild = null;
+    for(var j = 0; j<MW.CONTAINER.MINES.length; j++){
+        selChild = MW.CONTAINER.MINES[j];
+        if(selChild.active = false){
+            selChild.active = true;
+            return selChild;
+        }
+    }
+    selChild = Mine.create();
+    return selChild;
+
+};
+
+Mine.create = function(){
+
+    var mine = new Mine();
+    MW.CONTAINER.MINES.push(mine);
+    return mine;
+
+};

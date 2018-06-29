@@ -17,13 +17,10 @@ var SysMenu = cc.Layer.extend({
 
     init:function(){
         this.initBackground();
+        this.schedule(this.getMine, 1);
         this._ship = new Ship();
         this._shadow = new Shadow();
-        var mine = new Mine();
-        mine.x = cc.winSize.width/2;
-        mine.y = cc.winSize.height/2+ 100;
 
-        this.addChild(mine);
 
         // this.screenRect = cc.rect(0, 0, winSize.width, winSize.height + 10);
         var l1 = cc.spriteFrameCache.getSpriteFrame("player_1/player_b_l1.png");
@@ -136,6 +133,19 @@ var SysMenu = cc.Layer.extend({
                 }
             }, this);
         }
+    },
+
+    getMine: function(){
+
+        var x = Math.floor(Math.random()*2);
+
+        if( x===1 ) {
+            var mine = Mine.getOrCreateMine();
+            mine.x = Math.floor(Math.random()*cc.winSize.width);
+            mine.y = cc.winSize.height+100;
+            this.addChild(mine);
+        }
+
     }
 
 });
