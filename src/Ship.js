@@ -17,6 +17,7 @@ var Ship = cc.Sprite.extend({
         this.runAction(MoveToStart);
         //this.addChild(bullet, 30);
         this.schedule(this.shoot, 1/6);
+        // this.runAction(MW.move_left);
         this.scheduleUpdate();
 
     },

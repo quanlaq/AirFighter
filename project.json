@@ -20,6 +20,7 @@
     "jsList": [
         "src/Bullet.js",
         "src/GameConfig.js",
+        "src/Mine.js",
         "src/Resource.js",
         "src/Shadow.js",
         "src/Ship.js",

@@ -8,6 +8,7 @@ var SysMenu = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.player_plist);
         cc.spriteFrameCache.addSpriteFrames(res.fx_plist);
         cc.spriteFrameCache.addSpriteFrames(res.shadows_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.enemy_plist);
         cc.audioEngine.preloadMusic(res.backgroundmusic_mp3);
         cc.audioEngine.playMusic(res.backgroundmusic_mp3, true);
         // cc.audioEngine.preloadEffect(res.bulletsound_mp3);
@@ -18,7 +19,11 @@ var SysMenu = cc.Layer.extend({
         this.initBackground();
         this._ship = new Ship();
         this._shadow = new Shadow();
+        var mine = new Mine();
+        mine.x = cc.winSize.width/2;
+        mine.y = cc.winSize.height/2+ 100;
 
+        this.addChild(mine);
 
         // this.screenRect = cc.rect(0, 0, winSize.width, winSize.height + 10);
         var l1 = cc.spriteFrameCache.getSpriteFrame("player_1/player_b_l1.png");
