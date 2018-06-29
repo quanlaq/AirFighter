@@ -14,12 +14,19 @@ var SysMenu = cc.Layer.extend({
         // cc.audioEngine.preloadEffect(res.bulletsound_mp3);
         this.init();
     },
-
     init:function(){
         this.initBackground();
+        this.initAnimation();
         this.schedule(this.getMine, 1);
         this._ship = new Ship();
         this._shadow = new Shadow();
+        g_sharedGameLayer = this;
+        this.addChild(this._ship);
+        this.addChild(this._shadow, 20);
+        this.addKeyboardListener();
+
+    },
+    initAnimation: function(){
 
 
         // this.screenRect = cc.rect(0, 0, winSize.width, winSize.height + 10);
@@ -54,10 +61,6 @@ var SysMenu = cc.Layer.extend({
         MW.smove_mid_from_l.retain();
         MW.smove_mid_from_r.retain();
 
-        g_sharedGameLayer = this;
-        this.addChild(this._ship);
-        this.addChild(this._shadow, 20);
-        this.addKeyboardListener();
 
     },
     initBackground:function(){
@@ -134,7 +137,6 @@ var SysMenu = cc.Layer.extend({
             }, this);
         }
     },
-
     getMine: function(){
 
         var x = Math.floor(Math.random()*2);
@@ -146,7 +148,8 @@ var SysMenu = cc.Layer.extend({
             this.addChild(mine);
         }
 
-    }
+    },
+
 
 });
 

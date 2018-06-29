@@ -4,15 +4,21 @@ var Bullet = cc.Sprite.extend({
    ctor: function(){
 
        this._super("#plasma/plasma_1.png");
-
-        this.scheduleUpdate();
+       this.scheduleUpdate();
    },
 
    update: function(dt){
         var x = this.x, y = this.y;
         this.y = y + this.bulletSpeed * dt;
+
+        if(this.y > cc.winSize.height) this.destroy();
+
+   },
+
+    destroy: function() {
         this.active = false;
-   }
+        this.visible = false;
+    }
 
 });
 

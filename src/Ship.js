@@ -5,7 +5,6 @@ var Ship = cc.Sprite.extend({
         this._super("#player_1/player_b_m.png");
         this.init();
     },
-
     init: function(){
         var appearPosition = cc.p(cc.winSize.width/2, -200);
         this.attr({
@@ -25,8 +24,20 @@ var Ship = cc.Sprite.extend({
         // this._runAnimation();
         MW.SHIP_POS.x = this.x;
         MW.SHIP_POS.y = this.y;
-
         this.updateMove(dt);
+
+        var rect1 = this.getBoundingBox();
+        for(var j=0; j<MW.CONTAINER.MINES.length; j++){
+
+            var mine = MW.CONTAINER.MINES[j];
+
+            var rect2 = mine.getBoundingBox();
+            if(cc.rectIntersectsRect(rect1, rect2)) {
+                cc.log("collision");
+            }
+
+        }
+
     },
     updateMove:function(dt) {
         var self = this;
@@ -53,6 +64,11 @@ var Ship = cc.Sprite.extend({
                 break;
         }
     },
+
+    collideRect: function(){
+        return cc.rect(this.x, this.y, this.width, this.width);
+    },
+
 
     shoot: function(){
 

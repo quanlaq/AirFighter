@@ -5,7 +5,6 @@ var Mine = cc.Sprite.extend({
         this._super("#mine_1/mine_1_02.png");
         this.init();
     },
-
     init: function(){
 
         var aniFrames = [];
@@ -24,15 +23,15 @@ var Mine = cc.Sprite.extend({
         this.scheduleUpdate();
 
     },
-
     update: function(dt){
 
         this.y = this.y - this.speed*dt;
-
         if(this.y < 0) this.active = false;
 
+    },
 
-
+    collideRect: function(){
+        return cc.rect(this.x, this.y, this.width, this.height);
     }
 
 });
