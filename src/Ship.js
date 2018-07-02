@@ -1,5 +1,6 @@
 var Ship = cc.Sprite.extend({
     speed: 220,
+    isAlive: true,
     //player:null,
     ctor: function(){
         this._super("#player_1/player_b_m.png");
@@ -26,18 +27,11 @@ var Ship = cc.Sprite.extend({
         MW.SHIP_POS.y = this.y;
         this.updateMove(dt);
 
-        var rect1 = this.getBoundingBox();
-        for(var j=0; j<MW.CONTAINER.MINES.length; j++){
-
-            var mine = MW.CONTAINER.MINES[j];
-
-            var rect2 = mine.getBoundingBox();
-            if(cc.rectIntersectsRect(rect1, rect2)) {
-                cc.log("collision");
-            }
-
-        }
-
+    },
+    destroy: function(){
+        // this.runAction(MW.player_explosion_animation);
+        this.isAlive = false;
+        this.visible = false;
     },
     updateMove:function(dt) {
         var self = this;
@@ -64,12 +58,6 @@ var Ship = cc.Sprite.extend({
                 break;
         }
     },
-
-    collideRect: function(){
-        return cc.rect(this.x, this.y, this.width, this.width);
-    },
-
-
     shoot: function(){
 
         var bullet = new Bullet.getOrCreateBullet();

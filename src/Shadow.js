@@ -11,6 +11,9 @@ var Shadow = cc.Sprite.extend({
     update: function(dt) {
        this.x = MW.SHIP_POS.x - 30;
        this.y = MW.SHIP_POS.y - 50;
+    },
+    destroy: function() {
+       this.visible = false;
     }
 
 });

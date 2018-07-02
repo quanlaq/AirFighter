@@ -1,7 +1,7 @@
 var res = {
     enemy_plist: 'res/Enemies/Enemy.plist',
     enemy_png: 'res/Enemies/Enemy.png',
-    explosion_plist: 'res/Explosions/explosions.plist',
+    explosion_plist: 'res/Explosions/explosion.plist',
     explosion_png: 'res/Explosions/explosion.png',
     fx_plist: 'res/FX/fx.plist',
     fx_png: 'res/FX/fx.png',
@@ -21,6 +21,7 @@ var g_mainmenu = [
     res.player_plist,
     res.backgroundmusic_mp3,
     res.bulletsound_mp3,
-    res.shadows_plist
+    res.shadows_plist,
+    res.explosion_plist
 ];
 

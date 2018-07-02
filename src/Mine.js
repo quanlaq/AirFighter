@@ -1,8 +1,9 @@
 var Mine = cc.Sprite.extend({
     speed: 150,
-    active: true,
+    isActive: true,
     ctor: function(){
         this._super("#mine_1/mine_1_02.png");
+        this.isActive = true;
         this.init();
     },
     init: function(){
@@ -26,12 +27,15 @@ var Mine = cc.Sprite.extend({
     update: function(dt){
 
         this.y = this.y - this.speed*dt;
-        if(this.y < 0) this.active = false;
+        if(this.y < 0) this.isActive = false;
 
     },
 
-    collideRect: function(){
-        return cc.rect(this.x, this.y, this.width, this.height);
+    destroy: function(){
+
+        this.isActive = false;
+        this.visible = false;
+
     }
 
 });
@@ -40,8 +44,9 @@ Mine.getOrCreateMine= function(){
     var selChild = null;
     for(var j = 0; j<MW.CONTAINER.MINES.length; j++){
         selChild = MW.CONTAINER.MINES[j];
-        if(selChild.active = false){
-            selChild.active = true;
+        if(selChild.isActive === false){
+            selChild.isActive = true;
+            selChild.visible = true;
             return selChild;
         }
     }
@@ -51,7 +56,6 @@ Mine.getOrCreateMine= function(){
 };
 
 Mine.create = function(){
-
     var mine = new Mine();
     MW.CONTAINER.MINES.push(mine);
     return mine;

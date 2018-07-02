@@ -14,7 +14,8 @@ MW.smove_left = null;
 MW.smove_right = null;
 MW.smove_mid_from_r = null;
 MW.smove_mid_from_l = null;
-
+MW.player_explosion_animation = null;
+MW.isGameOver = false;
 
 MW.CONTAINER = {
     ENEMIES:[],
